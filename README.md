@@ -16,4 +16,5 @@ There are various commands available via NPM for use during development and to c
 
 - `npm run build`: Build the production version of the source code into `/build`.
 - `npm run start` : Start a development server with the development build of the source code on Port `3000`.
+- `npm run watch`: Watch source files for changes and build development version of the source code into `/build`. without starting a server.
 - `npm run test`: Lint the source code and run all available tests cases.

@@ -4,13 +4,15 @@
   "description": "Base repo for JS build with webpack and babel",
   "main": "src/js/index.js",
   "scripts": {
-    "start": "node -r babel-register node_modules/.bin/webpack-dev-server --open --config=webpack/development.js",
+    "start": "node -r babel-register node_modules/.bin/webpack-dev-server --open --hot --config=webpack/development.js",
+    "watch": "npm run -s build:clean && npm run -s build:assets && npm run watch:webpack",
+    "watch:webpack": "node -r babel-register node_modules/.bin/webpack --progress --watch --config=webpack/development.js",
     "test": "npm run test:lint",
     "test:lint": "eslint src webpack bin",
     "build": "npm run -s build:clean && npm run -s build:webpack && npm run -s build:assets",
-    "build:clean": "rm -fr ./build",
+    "build:clean": "rimraf ./build",
     "build:webpack": "node -r babel-register node_modules/.bin/webpack --config=webpack/production.js",
-    "build:assets": "mkdir -p build/assets && rsync -rtvqL src/assets/ build/assets"
+    "build:assets": "mkdirp build/assets && ncp src/assets/ build/assets"
   },
   "repository": {
     "type": "git",
@@ -45,8 +47,11 @@
     "file-loader": "^0.10.0",
     "html-webpack-plugin": "^2.28.0",
     "import-glob-loader": "^1.1.0",
+    "mkdirp": "^0.5.1",
+    "ncp": "^2.0.0",
     "node-sass": "^4.5.0",
     "postcss-loader": "^1.3.1",
+    "rimraf": "^2.6.1",
     "sass-loader": "^6.0.1",
     "style-loader": "^0.13.1",
     "svg-sprite-loader": "^0.3.0",
